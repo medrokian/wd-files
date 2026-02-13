@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+    <title>homepage</title>
+        <script src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/js/bubbles.js"></script>
+    <style>
+      /* Basic Styles for the Layout */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        background-image: url("https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/IMG_6958.gif");
+        background-color: #f9f9f9;
+        overflow-x: hidden; /* Prevent horizontal scroll */
+      }
+      p {
+        color: white;
+      }
+      h1, h2, h3, h4 {
+        color: white;
+      }
+
+      /* Header Section */
+      header {
+        padding: 20px;
+        text-align: center;
+        border-bottom: 2px dashed #333; /* Perforated line below the header */
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      /* Bouncing Text Animation */
+      .bouncing-title {
+        position: absolute;
+        top: 6%;
+        left: 0; /* Start from the left edge */
+        transform: translateY(-50%); /* Center vertically */
+        font-size: 2rem;
+        font-weight: bold;
+        color: #007bff;
+        white-space: nowrap;
+        animation: bounce 4.5s ease-in-out infinite; /* Speed of bounce (no easing) */
+      }
+
+      /* Keyframes for Bouncing Title (Left to Right and Back) */
+      @keyframes bounce {
+        0% {
+          transform: translateX(-90%); /* Start off-screen to the left */
+        }
+        50% {
+          transform: translateX(90vw); /* Move all the way to the right edge */
+        }
+        100% {
+          transform: translateX(-90%); /* Return to the left edge */
+        }
+      }
+
+      /* Layout container (Sidebar + Main Content) */
+      .container {
+        display: flex;
+        height: calc(100vh - 60px); /* Subtract header height */
+        border-bottom: 2px dashed #333; /* Perforated line between header and body */
+      }
+
+      /* Sidebar Section */
+      .sidebar {
+        width: 250px;
+        padding: 20px;
+        box-sizing: border-box;
+        border-right: 2px dashed #333; /* Perforated line to separate sidebar from content */
+        background-color: transparent;
+      }
+
+      /* Main Content Section */
+      .main-content {
+        flex-grow: 1;
+        padding: 20px;
+        overflow-y: auto;
+        background-color: transparent;
+        position: relative; /* Position relative for the image */
+      }
+
+      /* Sidebar Links */
+      .sidebar a {
+        display: block;
+        color: #333;
+        text-decoration: none;
+        margin: 10px 0;
+        font-weight: bold;
+      }
+
+      .sidebar a:hover {
+        color: #007bff;
+      }
+
+      /* Footer Section */
+      footer {
+        background-color: transparent;
+        color: #333;
+        text-align: center;
+        padding: 10px;
+        border-top: 2px dashed #333; /* Perforated line above the footer */
+      }
+
+      /* To ensure the sections maintain a transparent background */
+      .container, header, footer {
+        background-color: transparent;
+      }
+
+      /* Style for the Totorola image container (scaled down) */
+      .totorola-container {
+        position: relative;
+        width: 180px; /* Scale down phone width */
+        height: 500px; /* Scale down phone height */
+        margin: 0 auto; /* Centering the phone image */
+      }
+
+      /* Style for the Totorola image */
+      .totorola-image {
+        width: 100%;
+        height: auto;
+        cursor: pointer;
+        transition: opacity 0.3s ease; /* Smooth transition for opacity changes */
+      }
+
+      /* Phone Screen container (scaled down, adjusted position and transparent) */
+      .phone-screen {
+        position: absolute;
+        left: 30px; /* Adjust position for scaled-down phone */
+        top: 50px; /* Slightly adjust top to bring the screen down */
+        width: 120px; /* Shortened screen width */
+        height: 160px; /* Shortened screen height */
+        background-color: transparent; /* Make screen background transparent */
+        border: 2px solid rgba(255, 255, 255, 0.7); /* Semi-transparent white border */
+        border-radius: 8px; /* Optional: rounded corners for a more realistic look */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.6); /* Subtle shadow effect */
+        z-index: 2;
+        display: none; /* Initially hidden */
+      }
+
+      /* Content inside the screen */
+      .screen-content {
+        color: white;
+        font-size: 16px;
+        position: relative;
+        z-index: 1;
+        padding: 10px;
+      }
+
+    </style>
+    <script>
+      // Function to open links in iframe within a new window
+      function openInIframe(url) {
+        var win = window.open('', '_blank'); // Open a new blank window
+        win.document.body.style.margin = "0";
+        win.document.body.style.height = "100vh";
+
+        var iframe = win.document.createElement("iframe");
+        iframe.style.border = "none";
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.style.margin = "0";
+        iframe.referrerpolicy = "no-referrer";
+        iframe.allow = "fullscreen";
+        iframe.src = url; // Load the desired URL into the iframe
+
+        win.document.body.appendChild(iframe);
+      }
+
+      // Handle the click event for each link and open it in an iframe
+      function handleClick(url) {
+        openInIframe(url);
+      }
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var img = document.getElementById('totorolaImage');
+        var screen = document.getElementById('phoneScreen');
+        var screenContent = document.getElementById('screenContent');
+        var secretCode = ['1', '1', '2', '2', '3', '3'];
+        var secretCode1 = ['1', '2','3', '4', '5'];
+        var enteredCode = [];
+        var isPhoneOpen = false;
+
+        // Function to handle the screen interaction
+        img.addEventListener('click', function() {
+          if (!isPhoneOpen) {
+            img.src = 'https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/Totorola_Opening1.webp';  // Temporary image on click
+            setTimeout(function() {
+              img.src = 'https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/Totorola1.webp';  // Final image after 1 second
+              isPhoneOpen = true; // Mark the phone as open
+              screen.style.display = 'block';  // Show the screen when phone is open
+            }, 1000); // 1000ms = 1 second
+          }
+        });
+
+        // Prevent interaction if phone is open
+        screen.addEventListener('click', function(event) {
+          if (isPhoneOpen) {
+            event.stopPropagation();  // Prevent click action when phone is open
+          }
+        });
+
+        // Add keyboard events for handling numpad-like functionality with PC numkeys
+        document.addEventListener('keydown', function(event) {
+          if (isPhoneOpen) {
+            // Handle Enter (submit code)
+            if (event.key === 'Enter') {
+              if (JSON.stringify(enteredCode) === JSON.stringify(secretCode)) {
+                alert("Code correct! Downloading Emerald Extreme Rom.gba...");
+                window.location.href = 'https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/Emerald Extreme Rom.gba';  // Trigger the download
+              }
+              if (JSON.stringify(enteredCode) === JSON.stringify(secretCode1)) {
+  alert("Code correct! but at what cost...");
+  const delay = Math.floor(Math.random() * (10 - 3 + 1) + 3) * 1000;
+   setTimeout(() => {
+    // Create overlay div
+    const overlay = document.createElement("div");
+    overlay.style.position = "fixed";
+    overlay.style.top = "0";
+    overlay.style.left = "0";
+    overlay.style.width = "100vw";
+    overlay.style.height = "100vh";
+    overlay.style.zIndex = "9999";
+    overlay.style.backgroundColor = "";
+    overlay.style.display = "flex";
+    overlay.style.justifyContent = "center";
+    overlay.style.alignItems = "center";
+
+    // Create GIF element
+    const gif = document.createElement("img");
+    gif.src = "https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/foxy.gif";
+    gif.style.width = "100%";
+    gif.style.height = "100%";
+    gif.style.objectFit = "cover";
+
+    // Create audio element
+    const audio = document.createElement("audio");
+    audio.src = "https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/foxy.mp3";
+    audio.autoplay = true;
+    audio.style.display = "none";
+
+    // Append everything
+    overlay.appendChild(gif);
+    overlay.appendChild(audio);
+    document.body.appendChild(overlay);
+
+    // Optional: Exit overlay after 6 seconds
+    setTimeout(() => {
+      document.body.removeChild(overlay);
+    }, 6000);
+  }, delay);
+}
+        
+
+              
+              else {
+                alert("Incorrect code.");
+              }
+              enteredCode = []; // Reset the code after checking
+              screenContent.innerHTML = ''; // Clear screen content after submitting
+            }
+            // Handle Backspace (clear the last entered number)
+            else if (event.key === 'Backspace') {
+              enteredCode.pop();
+              screenContent.innerHTML = enteredCode.join(''); // Update the screen display
+            }
+            // Handle number keys (0-9)
+            else if (event.key >= '0' && event.key <= '9') {
+              enteredCode.push(event.key);
+              screenContent.innerHTML = enteredCode.join(''); // Update the screen display
+            }
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+
+    <!-- Header Section -->
+    <header>
+      <div class="bouncing-title">homepage thing</div>
+    </header>
+
+    <!-- Layout Container (Sidebar + Main Content) -->
+    <div class="container">
+
+      <!-- Sidebar Section -->
+<div class="sidebar">
+  <h3>link things</h3>
+  <span class="hover-effect" data-href="boo" onclick="handleClick(this.getAttribute('data-href'))" style="cursor:pointer;">
+    <h4>nothing</h4>
+  </span>
+  <span class="hover-effect" data-href="put link here" onclick="handleClick(this.getAttribute('data-href'))" style="cursor:pointer;">
+    <h4>nothing again</h4>
+  </span>
+  <span class="hover-effect" data-href="nothing yet" onclick="handleClick(this.getAttribute('data-href'))" style="cursor:pointer;">
+    <h4>still nothing</h4>
+  </span>
+    <span class="hover-effect" data-href="i nono" onclick="handleClick(this.getAttribute('data-href'))" style="cursor:pointer;">
+    <h4>y u still reading</h4>
+  </span>
+  <p>​</p>
+  <a href="https://forms.gle/ZKzfyBAWM34a2Gn28" target="_blank" class="hover-effect">
+    <h4>homepage feedback/suggestions</h4>
+  </a>
+</div>
+
+<style>
+  .hover-effect {
+    display: block;
+    transition: transform 0.2s ease-in-out;
+    margin-bottom: 10px; /* Adds spacing */
+  }
+
+  .hover-effect:hover {
+    transform: scale(1.1);
+  }
+
+  .sidebar a h4,
+  .sidebar span h4 {
+    margin: 0;
+    padding: 0;
+  }
+</style>
+
+
+
+      <!-- Main Content Section -->
+      <div class="main-content">
+        <h2>The Wall</h2>
+        <p>This is where site updates and news will be shown</p>
+        <p>old changelog (2024) is redacted</p>
+        <p>WE'RE BACK BABY (no games anymore so go away if that what your here for) 4/27/25</p>
+        <p>added a new code 4/29/25</p>
+        <p>added a hover affect for the links 4/29/25</p>
+        <p>added new gifs (scroll to bottom) 6/3/25</p>
+        <p>added a single file version (this file) 2/12/26</p>
+
+        <!-- Totorola Container -->
+        <div class="totorola-container">
+          <img id="totorolaImage" src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/Closed_Totorola.webp" alt="Totorola" class="totorola-image" />
+          <div id="phoneScreen" class="phone-screen">
+            <div id="screenContent" class="screen-content">
+              <p>Enter code:</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+      <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/IMG_6957.gif" alt="Image" />
+      <div class="image-container">
+        <!-- First row of 6 images -->
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/ao3gif.gif" alt="Image 1"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/aol.gif" alt="Image 2"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/arachno.gif" alt="Image 3"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/besteyes.gif" alt="Image 4"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/bestviewedcomp.gif" alt="Image 5"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/bob.gif" alt="Image 6"/>
+
+        <!-- Second row of 6 images -->
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/dbfire88.gif" alt="Image 7"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/discord.gif" alt="Image 8"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/kool medrok.gif" alt="Image 9"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/drpepper.gif" alt="Image 10"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/firefoxnow.gif" alt="Image 11"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/getwmp7.gif" alt="Image 12"/>
+
+        <!-- Third row of 6 images -->
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/github.gif" alt="Image 13"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/gnu-linux.gif" alt="Image 14"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/java_green_button.gif" alt="Image 15"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/js-warning.gif" alt="Image 16"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/ktlnow.gif" alt="Image 17"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/minecraft.gif" alt="Image 18"/>
+
+        <!-- Fourth row of 3 images (centered) -->
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/nedscape_now.gif" alt="Image 19"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/neocities3.gif" alt="Image 20"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/proweb_teal.gif" alt="Image 21"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/ubuntu-88x31.gif" alt="Image 22"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/nowebp.gif" alt="Image 23"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/pokemon.gif" alt="Image 24"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/cheezit.gif" alt="image 25"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/archlinux.gif" alt="image 26"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/tyg.gif" alt="image 27"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/boblego.gif" alt="image 28"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/aimlink.gif" alt="image 29"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/7zip.gif" alt="image 30"/>
+        <img src="https://cdn.jsdelivr.net/gh/somethingorange3323/liliththecrow.github.io@main/images/transnow2.gif" alt="image 31"/>
+      </div>
+      <p>&copy; liliththecrow. All Rights Reserved or something.</p>
+    </footer>
+
+  </body>
+</html>
